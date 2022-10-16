@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>fastblur_internal.vert.qsb</file>
+        <file>fastblur_internal.frag.qsb</file>
+    </qresource>
+</RCC>

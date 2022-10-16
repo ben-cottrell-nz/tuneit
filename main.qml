@@ -7,15 +7,42 @@ Window {
     height: 480
     visible: true
     title: qsTr("TuneIt")
+    Component.onCompleted: {
+        //audioRecorder.start()
+    }
+
+    WorkerScript {
+        id: updateWorker
+        source: "updateworker.mjs"
+        onMessage: (messageObject) => {
+//                       console.log(messageObject.result)
+                       mycanvas.fftValues = messageObject.result;
+                       mycanvas.requestPaint()
+                   }
+    }
+
+    Connections {
+        target: fftProcessor
+        function onProcessingDone(numFrames,outputBufferList) {
+            updateWorker.sendMessage({outputBufferList: outputBufferList, numFrames: numFrames })
+        }
+            //mycanvas.fftValues = [];
+//            for (var i=0; i<numFrames; i++) {
+//                console.log(`${fftProcessor.outputBufferAt(i,0)}, ${fftProcessor.outputBufferAt(i,1)}`)
+//    mycanvas.fftValues.push([fftProcessor.outputBufferAt(i,0), fftProcessor.outputBufferAt(i,1)])
+//            mycanvas.requestPaint();
+//            }
+    }
 
     Rectangle {
+
         //    width: parent.
         anchors.fill: parent
-
         color: "#222"
         Text {
             color: "white"
             font.family: "Roboto"
+            z: 999
             text: `
             <h1 style="font-weight: 300; word-spacing: -36pt">C#<sub>4</sub></h1> <i style="font-size: 40%">217.18 Hz</i>
             `
@@ -32,30 +59,38 @@ Window {
 
         Canvas {
             id: mycanvas
-            width: 300
-            height: 300
+            width: parent.width * 0.33
+            height: parent.height * 0.33
+            anchors.centerIn: parent
             anchors.fill: parent
-
-            onPaint: {
+            renderTarget: Canvas.FramebufferObject
+            renderStrategy: Canvas.Cooperative
+            property var fftValues: []
+            function repaint() {
                 var ctx = getContext("2d");
+                ctx.resetTransform()
+                ctx.fillStyle = 'black'
+                ctx.fillRect(0, 0, width, height)
                 var centerX = mycanvas.width / 2
                 var centerY = mycanvas.height / 2
                 var radius = Math.min(mycanvas.width, mycanvas.height) * 0.9
                 var barStrokeWidth = 5
                 function deg2rad(val) { return val/180*Math.PI; }
-                var numBars = 168
+                var numBars = 96
                 var barRotSpacing = 360/numBars
     //            var circumOffsetAngle = (41 / (2 * Math.PI * radius) * 360) / 180 * Math.PI
                 var circumOffsetAngleDeg = 1
-                ctx.clearRect(0,0,ctx.width,ctx.height)
-                ctx.fillStyle = 'transparent';
+//                ctx.fillStyle = 'black'
+//                ctx.fillRect(0,0,ctx.width, ctx.height)
+//                ctx.clearRect(0,0,ctx.width,ctx.height)
+//                ctx.fillStyle = 'transparent';
                 ctx.beginPath();
                 ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
                 //draw 24 segments around the circle
                 ctx.lineCap = 'round'
                 ctx.lineWidth = barStrokeWidth
 
-                for (var seg=0;seg<filt.numFreqBins;seg++) {
+                for (var seg=0;seg<numBars/*mycanvas.fftValues.length*/;seg++) {
                     ctx.beginPath()
     //                ctx.strokeStyle = Qt.tint("red", Qt.rgba(0.16,1,0.16,seg/numBars))
     //                ctx.strokeStyle = Qt.hsva(lower.value + Math.cos(seg/numBars*Math.PI*2)*upper.value,1,1,1)
@@ -65,10 +100,8 @@ Window {
                     ctx.strokeStyle = Qt.tint(Qt.rgba(0.64,0.83,0.65,1),
                                               Qt.rgba(1,0.878,0.51,0.5+Math.sin(seg/numBars*Math.PI*4)))
                     ctx.fillStyle = ctx.strokeStyle
-                    ctx.moveTo(centerX, centerY-(radius*0.33))
-                    ctx.lineTo(centerX, centerY-(radius*(0.34+Math.random()*0.065
-                                                         * Math.abs(Math.cos(seg/numBars*Math.PI*12)*4) )))
-
+                    ctx.moveTo(centerX/*seg/numBars*mycanvas.width*/, centerY-(radius*0.33))
+                    ctx.lineTo(centerX/*seg/numBars*mycanvas.width*/, centerY-( radius*(0.34+mycanvas.fftValues[mycanvas.fftValues.length/2+Math.floor(seg/numBars*(mycanvas.fftValues.length/2))])) )
                     ctx.stroke()
     //                ctx.save()
                     ctx.font = "600 12pt sans-serif"
@@ -89,10 +122,15 @@ Window {
                     ctx.translate(-centerX, -centerY)
     //                ctx.restore()
                 }
-    //            ctx.translate(centerX, centerY)
-    //            ctx.rotate(deg2rad(mycanvas.rot))
-    //            ctx.translate(-centerX, -centerY)
-    //            context.fill();
+                //            ctx.translate(centerX, centerY)
+                //            ctx.rotate(deg2rad(mycanvas.rot))
+                //            ctx.translate(-centerX, -centerY)
+                //            context.fill();
+                requestAnimationFrame(repaint)
+            }
+            onPaint: {
+                repaint();
+//                requestAnimationFrame(repaint)
             }
         }
     }

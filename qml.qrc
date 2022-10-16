@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>updateworker.mjs</file>
     </qresource>
 </RCC>
