@@ -12,6 +12,10 @@ bool AudioBufferRecorder::start()
     if (m_adc.getDeviceCount() < 1) {
         return false;
     }
+    m_adc.setErrorCallback([](RtAudioErrorType type,
+                           const std::string &errorText){
+        qDebug() << "rtaudio error, type " << type << ": " << errorText.c_str();
+    });
     RtAudio::StreamParameters params;
     params.deviceId = m_adc.getDefaultInputDevice();
     params.nChannels = 2;

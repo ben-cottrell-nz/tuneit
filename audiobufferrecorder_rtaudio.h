@@ -1,3 +1,4 @@
+#ifndef Q_OS_ANDROID
 #ifndef AUDIOBUFFERRECORDER_H
 #define AUDIOBUFFERRECORDER_H
 
@@ -17,8 +18,8 @@ public:
 signals:
     void bufferReady(int16_t* buffer, uint32_t bufferFrames);
 private:
-    QThread m_thread;
     RtAudio m_adc;
 };
 
 #endif // AUDIOBUFFERRECORDER_H
+#endif

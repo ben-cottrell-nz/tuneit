@@ -10,10 +10,9 @@ set(CMAKE_AUTORCC ON)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_EXE_LINKER_FLAGS -fuse-ld=mold)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Quick)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Quick)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Quick Gui)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Quick Gui)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -21,24 +20,51 @@ set(PROJECT_SOURCES
         assets.qrc
         fftfilterprocessor.cpp
 )
-if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-    add_compile_definitions(__LINUX_ALSA__=1 __LINUX_PULSE__=1)
-    set(RTAUDIO_SOURCES RtAudio.cpp)
+if (${ANDROID})
+    add_compile_definitions(USING_POSIX_THREADS=1)
+    set(OBOE_DIR /home/ben/Documents/git-repos/oboe)
+    include(oboe.cmake)
+    set(AUDIO_API_LIBS oboe)
+    set(PROJECT_SOURCES audiobufferrecorder_oboe.cpp ${PROJECT_SOURCES})
+    set(FFTW3_ROOT_DIR /home/ben/Downloads/fftw-3.3.10)
+    set(CMAKE_EXE_LINKER_FLAGS -fuse-ld=mold)
+
+    include(fftw-sources.cmake)
+    include_directories(${FFTW3_ROOT_DIR} ${FFTW3_ROOT_DIR}/api ${OBOE_DIR}/include ${CMAKE_CURRENT_SOURCE_DIR})
+    add_library(fftw3api STATIC ${FFTW3_API_SOURCES})
+    add_library(fftw3kernel STATIC  ${FFTW3_KERNEL_SOURCES})
+    add_library(fftw3threads STATIC  ${FFTW3_THREADS_SOURCES})
+    add_library(fftw3reodft STATIC  ${FFTW3_REODFT_SOURCES})
+    add_library(fftw3dft STATIC  ${FFTW3_DFT_SOURCES})
+    add_library(fftw3rdft STATIC  ${FFTW3_RDFT_SOURCES})
+elseif (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+    add_compile_definitions(__LINUX_ALSA__=1 __LINUX_PULSE__=1 USING_POSIX_THREADS=1)
+	set(RTAUDIO_SOURCES RtAudio.cpp)
     add_library(rtaudio STATIC ${RTAUDIO_SOURCES})
     set(AUDIO_API_LIBS asound rtaudio pulse pulse-simple)
     set(PROJECT_SOURCES audiobufferrecorder_rtaudio.cpp ${PROJECT_SOURCES})
+    set(FFTW3_ROOT_DIR /home/ben/Downloads/fftw-3.3.10)
+    set(CMAKE_EXE_LINKER_FLAGS -fuse-ld=mold)
+    include(fftw-sources.cmake)
+    include_directories(${FFTW3_ROOT_DIR} ${FFTW3_ROOT_DIR}/api ${CMAKE_CURRENT_SOURCE_DIR})
+    add_library(fftw3api STATIC ${FFTW3_API_SOURCES})
+    add_library(fftw3kernel STATIC  ${FFTW3_KERNEL_SOURCES})
+    add_library(fftw3threads STATIC  ${FFTW3_THREADS_SOURCES})
+    add_library(fftw3reodft STATIC  ${FFTW3_REODFT_SOURCES})
+    add_library(fftw3dft STATIC  ${FFTW3_DFT_SOURCES})
+    add_library(fftw3rdft STATIC  ${FFTW3_RDFT_SOURCES})
+elseif (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+	add_compile_definitions(__WINDOWS_WASAPI__=1)
+	set(RTAUDIO_SOURCES RtAudio.cpp)
+	add_library(rtaudio STATIC ${RTAUDIO_SOURCES})
+	set(AUDIO_API_LIBS rtaudio)
+	set(PROJECT_SOURCES audiobufferrecorder_rtaudio.cpp
+	${PROJECT_SOURCES})
+	set(FFTW3_ROOT_DIR E:/Downloads/fftw-3.3.5-dll64)
+	include_directories(${FFTW3_ROOT_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
+        #Needed when linking against static Qt libraries, MSVC2019
+	set(CMAKE_MSVC_RUNTIME_LIBRARY MultiThreadedDLL)
 endif()
-
-set(FFTW3_ROOT_DIR /home/ben/Downloads/fftw-3.3.10)
-include(fftw-sources.cmake)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/fftw3config ${FFTW3_ROOT_DIR})
-
-add_library(fftw3api STATIC ${FFTW3_API_SOURCES})
-add_library(fftw3kernel STATIC  ${FFTW3_KERNEL_SOURCES})
-add_library(fftw3threads STATIC  ${FFTW3_THREADS_SOURCES})
-add_library(fftw3reodft STATIC  ${FFTW3_REODFT_SOURCES})
-add_library(fftw3dft STATIC  ${FFTW3_DFT_SOURCES})
-add_library(fftw3rdft STATIC  ${FFTW3_RDFT_SOURCES})
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(TuneIt
@@ -63,27 +89,65 @@ else()
     endif()
 endif()
 
+if (${ANDROID})
+    target_include_directories(fftw3api PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/fftw3config-linux)
+    target_include_directories(fftw3kernel PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/fftw3config-linux)
+    target_include_directories(fftw3threads PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/fftw3config-linux)
+    target_include_directories(fftw3reodft PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/fftw3config-linux)
+    target_include_directories(fftw3dft PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/fftw3config-linux)
+    target_include_directories(fftw3rdft PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/fftw3config-linux)
+elseif (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+        target_include_directories(fftw3api PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/fftw3config-linux)
+        target_include_directories(fftw3kernel PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/fftw3config-linux)
+        target_include_directories(fftw3threads PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/fftw3config-linux)
+        target_include_directories(fftw3reodft PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/fftw3config-linux)
+        target_include_directories(fftw3dft PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/fftw3config-linux)
+        target_include_directories(fftw3rdft PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/fftw3config-linux)
+elseif (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+	target_link_directories(TuneIt PUBLIC ${FFTW3_ROOT_DIR}) 
+endif()
 
-target_include_directories(fftw3api PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/fftw3config)
-target_include_directories(fftw3kernel PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/fftw3config)
-target_include_directories(fftw3threads PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/fftw3config)
-target_include_directories(fftw3reodft PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/fftw3config)
-target_include_directories(fftw3dft PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/fftw3config)
-target_include_directories(fftw3rdft PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/fftw3config)
-
-target_link_libraries(TuneIt
-    PRIVATE
-  fftw3api
-  fftw3kernel
-  fftw3threads
-  fftw3reodft
-  fftw3dft
-  fftw3rdft
-  ${AUDIO_API_LIBS}
-    Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick
-)
+if (ANDROID)
+    set_property(TARGET TuneIt APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
+                     ${CMAKE_CURRENT_SOURCE_DIR}/android)
+    target_link_libraries(TuneIt
+            PRIVATE
+      fftw3api
+      fftw3kernel
+      fftw3threads
+      fftw3reodft
+      fftw3dft
+      fftw3rdft
+      ${AUDIO_API_LIBS}
+            Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick Qt${QT_VERSION_MAJOR}::Gui
+    )
+elseif (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+	target_link_libraries(TuneIt
+		PRIVATE
+	  fftw3api
+	  fftw3kernel
+	  fftw3threads
+	  fftw3reodft
+	  fftw3dft
+	  fftw3rdft
+	  ${AUDIO_API_LIBS}
+                Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick Qt${QT_VERSION_MAJOR}::Gui
+	)
+elseif (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+	target_link_libraries(TuneIt
+		PRIVATE
+	  libfftw3-3
+	  libfftw3l-3
+	  libfftw3f-3
+	  ${AUDIO_API_LIBS}
+                Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick Qt${QT_VERSION_MAJOR}::Gui
+	)
+	add_custom_command(TARGET TuneIt
+	POST_BUILD
+	COMMAND ${CMAKE_COMMAND} -E copy_if_different ${FFTW3_ROOT_DIR}/libfftw3-3.dll ${FFTW3_ROOT_DIR}/libfftw3l-3.dll ${FFTW3_ROOT_DIR}/libfftw3f-3.dll ${CMAKE_CURRENT_BINARY_DIR})
+endif()
 set_target_properties(TuneIt PROPERTIES
-    MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
+    MACOSX_BUNDLE_GUI_IDENTIFIER com.bgcottrell.tuneit
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
     MACOSX_BUNDLE TRUE

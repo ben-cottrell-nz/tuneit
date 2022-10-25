@@ -1,5 +1,6 @@
 #include "fftfilterprocessor.h"
 #include "fftw3.h"
+#include "music_notes.h"
 
 FFTFilterProcessor::FFTFilterProcessor(QObject *parent)
     : QObject{parent}
@@ -43,7 +44,7 @@ QList<qreal> FFTFilterProcessor::outputBufferList()
 
 QString FFTFilterProcessor::getPeakScientificNote()
 {
-
+	return QString();
 }
 
 void FFTFilterProcessor::processBuffer(int16_t *in, const int numFrames)

@@ -66,6 +66,7 @@ Window {
             renderTarget: Canvas.FramebufferObject
             renderStrategy: Canvas.Cooperative
             property var fftValues: []
+
             function repaint() {
                 var ctx = getContext("2d");
                 ctx.resetTransform()
@@ -76,7 +77,7 @@ Window {
                 var radius = Math.min(mycanvas.width, mycanvas.height) * 0.9
                 var barStrokeWidth = 5
                 function deg2rad(val) { return val/180*Math.PI; }
-                var numBars = 96
+                var numBars = 109
                 var barRotSpacing = 360/numBars
     //            var circumOffsetAngle = (41 / (2 * Math.PI * radius) * 360) / 180 * Math.PI
                 var circumOffsetAngleDeg = 1
@@ -89,6 +90,8 @@ Window {
                 //draw 24 segments around the circle
                 ctx.lineCap = 'round'
                 ctx.lineWidth = barStrokeWidth
+                var fftValues = mycanvas.fftValues;
+                var halfFftValuesLength = fftValues.length / 2;
 
                 for (var seg=0;seg<numBars/*mycanvas.fftValues.length*/;seg++) {
                     ctx.beginPath()
@@ -101,10 +104,9 @@ Window {
                                               Qt.rgba(1,0.878,0.51,0.5+Math.sin(seg/numBars*Math.PI*4)))
                     ctx.fillStyle = ctx.strokeStyle
                     ctx.moveTo(centerX/*seg/numBars*mycanvas.width*/, centerY-(radius*0.33))
-                    ctx.lineTo(centerX/*seg/numBars*mycanvas.width*/, centerY-( radius*(0.34+mycanvas.fftValues[mycanvas.fftValues.length/2+Math.floor(seg/numBars*(mycanvas.fftValues.length/2))])) )
+                    ctx.lineTo(centerX/*seg/numBars*mycanvas.width*/, centerY-(radius*(0.34+fftValues[halfFftValuesLength+Math.floor(seg/numBars*halfFftValuesLength)])) )
                     ctx.stroke()
     //                ctx.save()
-                    ctx.font = "600 12pt sans-serif"
     //                if (seg == 0) {
     //                    ctx.font = "16pt sans-serif"
     //                    ctx.fillText("Kilohertz (kHz)", centerX-81, centerY-(radius*0.33)+78)
@@ -128,6 +130,7 @@ Window {
                 //            context.fill();
                 requestAnimationFrame(repaint)
             }
+
             onPaint: {
                 repaint();
 //                requestAnimationFrame(repaint)

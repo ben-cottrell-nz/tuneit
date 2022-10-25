@@ -2,10 +2,14 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QDebug>
+#include <QQuickWindow>
+#ifdef Q_OS_ANDROID
+#include "audiobufferrecorder_oboe.h"
+#else
 #include "audiobufferrecorder_rtaudio.h"
+#endif
 #include <QThread>
 #include "fftfilterprocessor.h"
-#include "fftw3.h"
 
 int main(int argc, char *argv[])
 {
@@ -16,7 +20,7 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
     AudioBufferRecorder recorder;
     FFTFilterProcessor processor;
-    qDebug() << "Built with FFTW version " << fftw_version;
+    //qDebug() << "Built with FFTW version " << fftw_version;
     QObject::connect(&recorder,
                      &AudioBufferRecorder::bufferReady,
                      &app,

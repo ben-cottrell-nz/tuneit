@@ -1,0 +1,23 @@
+# ninja log v5
+12	941	6877515170000000	rtaudio_autogen/timestamp	5d3236cb177c94f0
+12	941	6877515170000000	rtaudio_autogen/mocs_compilation.cpp	5d3236cb177c94f0
+12	941	6877515170000000	E:/Documents/projects/TuneIt-Qt-FFTW3/build-TuneIt-Qt-FFTW3-Desktop_Qt_6_2_4_MSVC2019_64bit-Debug/rtaudio_autogen/timestamp	5d3236cb177c94f0
+12	941	6877515170000000	E:/Documents/projects/TuneIt-Qt-FFTW3/build-TuneIt-Qt-FFTW3-Desktop_Qt_6_2_4_MSVC2019_64bit-Debug/rtaudio_autogen/mocs_compilation.cpp	5d3236cb177c94f0
+949	1598	6877515180000000	CMakeFiles/rtaudio.dir/rtaudio_autogen/mocs_compilation.cpp.obj	59e4c899219d14f6
+953	3655	6877515200000000	CMakeFiles/rtaudio.dir/RtAudio.cpp.obj	9f535225e23a2a4c
+3666	3800	6877515210000000	rtaudio.lib	754ebe00b3adbb2b
+3801	5272	6877515220000000	TuneIt_autogen/timestamp	5d184e6c3037dc94
+3801	5272	6877515220000000	TuneIt_autogen/mocs_compilation.cpp	5d184e6c3037dc94
+3801	5272	6877515220000000	E:/Documents/projects/TuneIt-Qt-FFTW3/build-TuneIt-Qt-FFTW3-Desktop_Qt_6_2_4_MSVC2019_64bit-Debug/TuneIt_autogen/timestamp	5d184e6c3037dc94
+3801	5272	6877515220000000	E:/Documents/projects/TuneIt-Qt-FFTW3/build-TuneIt-Qt-FFTW3-Desktop_Qt_6_2_4_MSVC2019_64bit-Debug/TuneIt_autogen/mocs_compilation.cpp	5d184e6c3037dc94
+5278	5520	6877515220000000	TuneIt_autogen/EWIEGA46WW/qrc_assets.cpp	6dd34bb8ae3726af
+5278	5520	6877515220000000	E:/Documents/projects/TuneIt-Qt-FFTW3/build-TuneIt-Qt-FFTW3-Desktop_Qt_6_2_4_MSVC2019_64bit-Debug/TuneIt_autogen/EWIEGA46WW/qrc_assets.cpp	6dd34bb8ae3726af
+5281	5579	6877515220000000	TuneIt_autogen/EWIEGA46WW/qrc_qml.cpp	59e3f5f4c6d1e406
+5281	5579	6877515220000000	E:/Documents/projects/TuneIt-Qt-FFTW3/build-TuneIt-Qt-FFTW3-Desktop_Qt_6_2_4_MSVC2019_64bit-Debug/TuneIt_autogen/EWIEGA46WW/qrc_qml.cpp	59e3f5f4c6d1e406
+5585	10663	6877515270000000	CMakeFiles/TuneIt.dir/TuneIt_autogen/mocs_compilation.cpp.obj	a71a9fbdb17fbb01
+5589	10829	6877515280000000	CMakeFiles/TuneIt.dir/audiobufferrecorder_rtaudio.cpp.obj	b92d0e1228c19e3f
+10839	11063	6877515280000000	CMakeFiles/TuneIt.dir/TuneIt_autogen/EWIEGA46WW/qrc_assets.cpp.obj	a6d86dd85f4c990c
+11069	11327	6877515280000000	CMakeFiles/TuneIt.dir/TuneIt_autogen/EWIEGA46WW/qrc_qml.cpp.obj	cb9846264bd40bc3
+5581	11411	6877515280000000	CMakeFiles/TuneIt.dir/main.cpp.obj	43c9fca3f9a6d192
+10679	13158	6877515300000000	CMakeFiles/TuneIt.dir/fftfilterprocessor.cpp.obj	f52a3f46335fe55d
+13167	16347	6877515320000000	TuneIt.exe	a11652e4f14ffaf9
