@@ -14,7 +14,8 @@ void
 requestPermissions(const QStringList &permissions)
 {
     const int requestCode = 1;
-    QNativeInterface::QAndroidApplication::runOnAndroidMainThread([permissions, requestCode] {
+    bool isFinished = false;
+    auto threadPromise = QNativeInterface::QAndroidApplication::runOnAndroidMainThread([permissions, requestCode, &isFinished] {
         QJniEnvironment env;
         jclass clazz = env.findClass("java/lang/String");
         auto array = env->NewObjectArray(permissions.size(), clazz, nullptr);
@@ -28,7 +29,9 @@ requestPermissions(const QStringList &permissions)
                                                                   array,
                                                                   requestCode);
         env->DeleteLocalRef(array);
+        isFinished = true;
     });
+    while (!isFinished);
 }
 
 
@@ -38,60 +41,109 @@ OboeEngine::OboeEngine(AudioBufferRecorder *p)
     QJniEnvironment env;
     int devId = 0;
     requestPermissions({"android.permission.RECORD_AUDIO"});
-    {
-        jclass audioDevsClass = env->FindClass("com/bgcottrell/tuneit/AudioDevices");
-//        jmethodID method = env->GetStaticMethodID(audioDevsClass, "myfun", "(Landroid/content/Context;)V");
-//        jmethodID method = env->GetStaticMethodID(audioDevsClass, "getDefaultInputDeviceInfo", "(Landroid/content/Context;)V");
-//        jmethodID method = env->GetStaticMethodID(audioDevsClass,
-//                                            "getDefaultInputDeviceInfo",
-//                                            "(Landroid/content/context;)Landroid/media/AudioDeviceInfo;");
-//        env->CallStaticVoidMethod(audioDevsClass, method, QNativeInterface::QAndroidApplication::context());
-//        jobjectArray audioDevsInfo;
-//        env->CallStaticObjectMethod(audioDevsClass,
-//                                    method,
-//                                    QNativeInterface::QAndroidApplication::context());
-//        jint obj = QJniObject::callStaticMethod<jint>("com.bgcottrell.tuneit.AudioDevices",
-//                                              "getDefaultInputDeviceId",
-//                                              "(Landroid/content/context;)I",
-//                                                            QNativeInterface::QAndroidApplication::context()
-//                                              );
+    //based on code from https://github.com/juce-framework/JUCE/blob/master/modules/juce_audio_devices/native/juce_android_Oboe.cpp
+    jclass audioManagerClass = env->FindClass ("android/media/AudioManager");
+    jclass ctxClass = env->FindClass("android/content/Context");
+    jmethodID methodGetSystemService = env.findMethod(ctxClass,
+                                      "getSystemService",
+                                      "(Ljava/lang/String;)Ljava/lang/Object;");
+    auto audioManager = env->CallObjectMethod(
+                QNativeInterface::QAndroidApplication::context(),
+                methodGetSystemService,
+                QJniObject::fromString("audio").object()
+                );
+    jmethodID methodGetDevices = env->GetMethodID(audioManagerClass,
+                                                  "getDevices",
+                                                  "(I)[Landroid/media/AudioDeviceInfo;");
+    const int getInputDevs = 1;
+    jobjectArray devices = (jobjectArray)env->CallObjectMethod(audioManager,
+                          methodGetDevices,
+                          getInputDevs);
+    const int numDevices = env->GetArrayLength(devices);
+    jclass audioDeviceInfoClass = env->FindClass("android/media/AudioDeviceInfo");
+    jmethodID methodGetProductName = env.findMethod(audioDeviceInfoClass,
+                                                    "getProductName",
+                                                    "()Ljava/lang/CharSequence;");
+    jmethodID methodGetId = env.findMethod(audioDeviceInfoClass,
+                                           "getId",
+                                           "()I");
+    jclass charSequenceClass = env->FindClass("java/lang/CharSequence");
+    jmethodID methodToString = env.findMethod(charSequenceClass,
+                                              "toString",
+                                              "()Ljava/lang/String;");
+    jmethodID methodGetType = env.findMethod(audioDeviceInfoClass,
+                                             "getType",
+                                             "()I");
+    const std::vector<const char*> audioDevTypeNames = {
+            "TYPE_UNKNOWN",
+            "TYPE_BUILTIN_EARPIECE",
+            "TYPE_BUILTIN_SPEAKER",
+            "TYPE_WIRED_HEADSET",
+            "TYPE_WIRED_HEADPHONES",
+            "TYPE_LINE_ANALOG",
+            "TYPE_LINE_DIGITAL",
+            "TYPE_BLUETOOTH_SCO",
+            "TYPE_BLUETOOTH_A2DP",
+            "TYPE_HDMI",
+            "TYPE_HDMI_ARC",
+            "TYPE_USB_DEVICE",
+            "TYPE_USB_ACCESSORY",
+            "TYPE_DOCK",
+            "TYPE_FM",
+            "TYPE_BUILTIN_MIC",
+            "TYPE_FM_TUNER",
+            "TYPE_TV_TUNER",
+            "TYPE_TELEPHONY",
+            "TYPE_AUX_LINE",
+            "TYPE_IP",
+            "TYPE_BUS",
+            "TYPE_USB_HEADSET",
+            "TYPE_HEARING_AID",
+            "TYPE_BUILTIN_SPEAKER_SAFE",
+            "TYPE_REMOTE_SUBMIX",
+            "TYPE_BLE_HEADSET",
+            "TYPE_BLE_SPEAKER",
+            "TYPE_ECHO_REFERENCE",
+            "TYPE_HDMI_EARC",
+            "TYPE_BLE_BROADCAST"};
+    jobject info = env->GetObjectArrayElement(devices, 0);
+    jint id = env->CallIntMethod(info, methodGetId);
+    m_record_device_id = id;
+    for (int i=0; i < numDevices; i++) {
+        jobject info = env->GetObjectArrayElement(devices, i);
+        jobject productName = env->CallObjectMethod(info, methodGetProductName);
+        jstring productNameJstr = (jstring)env->CallObjectMethod(productName,
+                                                        methodToString);
+        const char* productNameCstr = env->GetStringUTFChars(productNameJstr, 0);
+        jint id = env->CallIntMethod(info, methodGetId);
+        jint type = env->CallIntMethod(info, methodGetType);
+        qDebug() << productNameCstr << ", " << id << ", " << audioDevTypeNames[type];
+        env->ReleaseStringUTFChars(productNameJstr, productNameCstr);
     }
-
-
-//    QJniEnvironment jniEnv;
-//    jclass audioDevsjclass = jniEnv.findClass("com/bgcottrell/tuneit/AudioDevices");
-//    jclass audioDevInfoCls = jniEnv.findClass("android/media/AudioDeviceInfo");
-//    QJniObject audioDevInfo = jniEnv->AllocObject(audioDevInfoCls);
-//    audioDevInfo.fromLocalRef(QJniObject::callStaticObjectMethod(
-//                "com/bgcottrell/tuneit/AudioDevices", "getDefaultInputDeviceInfo",
-//                "(Landroid/content/Context;)Landroid/media/AudioDeviceInfo;").object());
-
-//    {
-//      QJniObject obj = audioDevInfo.callObjectMethod(
-//          "getId", "()I;",
-//          QNativeInterface::QAndroidApplication::context());
-//      devId = *((int32_t *)obj.object());
-//    }
+    env->DeleteLocalRef(devices);
     int32_t defaultSamplingRate = 44100;
-    m_in_builder.setDeviceId(devId)
-            ->setDirection(oboe::Direction::Input)
-            ->setFormat(oboe::AudioFormat::I16)
-            ->setFormatConversionAllowed(true)
-            ->setPerformanceMode(oboe::PerformanceMode::LowLatency)
-            ->setSampleRate(defaultSamplingRate)
-            ->setChannelCount(1)
-            ->setErrorCallback(this)
-            ->setDataCallback(this);
+
 }
 
 void OboeEngine::start()
 {
-    m_in_builder.openStream(m_record_stream);
+    oboe::AudioStreamBuilder builder;
+    builder.setDeviceId(m_record_device_id)
+            ->setDirection(oboe::Direction::Input)
+            ->setFormat(oboe::AudioFormat::I16)
+            ->setFormatConversionAllowed(true)
+            ->setPerformanceMode(oboe::PerformanceMode::LowLatency)
+            ->setSampleRate(44100)
+            ->setChannelCount(1)
+            ->setDataCallback(this)
+            ->openStream(m_record_stream);
+    m_record_stream->requestStart();
 }
 
 void OboeEngine::stop()
 {
     m_record_stream->stop();
+    m_record_stream->close();
 }
 
 void OboeEngine::onErrorBeforeClose(oboe::AudioStream *oboeStream, oboe::Result error)

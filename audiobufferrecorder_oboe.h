@@ -7,7 +7,7 @@
 
 class AudioBufferRecorder;
 
-class OboeEngine : public oboe::AudioStreamCallback {
+class OboeEngine : public oboe::AudioStreamDataCallback {
 public:
     OboeEngine(AudioBufferRecorder* p);
     // AudioStreamErrorCallback interface
