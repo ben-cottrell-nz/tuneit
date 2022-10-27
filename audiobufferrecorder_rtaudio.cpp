@@ -50,3 +50,7 @@ bool AudioBufferRecorder::stop()
     if (m_adc.isStreamOpen()) { m_adc.closeStream(); }
     return true;
 }
+
+QString AudioBufferRecorder::getAPIName() {
+    return QString(m_adc.getApiDisplayName(m_adc.getCurrentApi()).c_str());
+}

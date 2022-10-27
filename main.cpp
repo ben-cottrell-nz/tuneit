@@ -11,6 +11,31 @@
 #include <QThread>
 #include "fftfilterprocessor.h"
 
+class QSGInfo : public QObject
+{
+    Q_OBJECT
+public:
+    enum GraphicsApi {
+        Unknown,
+        Software,
+        OpenVG,
+        OpenGL,
+        Direct3D11,
+        Vulkan,
+        Metal,
+        Null,
+
+        OpenGLRhi = OpenGL,
+        Direct3D11Rhi = Direct3D11,
+        VulkanRhi = Vulkan,
+        MetalRhi = Metal,
+        NullRhi = Null
+    };
+    Q_ENUM(GraphicsApi)
+    Q_INVOKABLE QString getRenderingApiName() { return QVariant::fromValue(
+            QSGInfo::GraphicsApi(QQuickWindow::graphicsApi())).toString(); }
+};
+
 int main(int argc, char *argv[])
 {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -20,6 +45,7 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
     AudioBufferRecorder recorder;
     FFTFilterProcessor processor;
+    QSGInfo qsgInfo;
     //qDebug() << "Built with FFTW version " << fftw_version;
     QObject::connect(&recorder,
                      &AudioBufferRecorder::bufferReady,
@@ -35,6 +61,7 @@ int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
     engine.rootContext()->setContextProperty("fftProcessor", &processor);
     engine.rootContext()->setContextProperty("audioRecorder", &recorder);
+    engine.rootContext()->setContextProperty("qsgInfo", &qsgInfo);
     engine.load(url);
     QThread* audioThread/* = new QThread(&app);*/;
     audioThread = QThread::create([&](){
@@ -47,3 +74,4 @@ int main(int argc, char *argv[])
     });
     return app.exec();
 }
+#include "main.moc"

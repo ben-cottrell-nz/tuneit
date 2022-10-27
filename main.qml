@@ -7,6 +7,7 @@ Window {
     height: 480
     visible: true
     title: qsTr("TuneIt")
+    color: "black"
 
     WorkerScript {
         id: updateWorker
@@ -24,11 +25,28 @@ Window {
             updateWorker.sendMessage({outputBufferList: outputBufferList, peakFreq, numFrames: numFrames })
         }
     }
-
+    Text {
+        id: infoLabel
+        font.pixelSize: 16
+        color: "white"
+        z: 99
+        text: audioRecorder != null ?
+`Audio API: ${audioRecorder.apiName != null ? audioRecorder.apiName : "Unknown"}
+Channels: ${audioRecorder.numChannels}
+Sampling Rate: ${audioRecorder.samplingRate}
+Buffer Size: 512
+QSG Rendering API: ${qsgInfo.getRenderingApiName()}
+` : `audioRecorder null
+`
+        //Channels: ${audioRecorder.channelCount} channels
+        //Sampling rate: ${audioRecorder.samplingRate}`
+    }
     Rectangle {
-        anchors.fill: parent
+        anchors.top: infoLabel.bottom
         color: "#222"
-
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
         Text {
             color: "white"
             font.family: "Roboto"
