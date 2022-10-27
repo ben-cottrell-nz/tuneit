@@ -16,10 +16,10 @@ public:
     Q_INVOKABLE double outputBufferAt(const int index, const int p);
     Q_INVOKABLE QList<qreal> outputBufferList();
     Q_INVOKABLE QString getPeakScientificNote();
-//    Q_INVOKABLE qreal getPeakFreq();
-    void processBuffer(int16_t* in, const int numFrames);
+    Q_INVOKABLE qreal getPeakFreq();
+    void processBuffer(int16_t* in, const int samplingRate, const int numFrames);
 signals:
-    void processingDone(const int numFrames, QList<double> outputBufferList);
+    void processingDone(const int numFrames, const qreal peakFreq, QList<double> outputBufferList);
 private:
     int m_buffer_length;
     int m_processed_frames;

@@ -199,7 +199,7 @@
 #define __DEC128_MAX__ 9.999999999999999999999999999999999E6144DL
 #define __FLT_MANT_DIG__ 24
 #define __LDBL_DECIMAL_DIG__ 21
-#define __VERSION__ "11.2.0"
+#define __VERSION__ "11.3.0"
 #define __UINT64_C(c) c ## UL
 #define __cpp_unicode_characters 201411L
 #define _STDC_PREDEF_H 1
@@ -209,6 +209,7 @@
 #define __FLT32_MANT_DIG__ 24
 #define __FLOAT_WORD_ORDER__ __ORDER_LITTLE_ENDIAN__
 #define SIZEOF_DPTR (sizeof(void*))
+#define __LINUX_ALSA__ 1
 #define __STDC_IEC_60559_COMPLEX__ 201404L
 #define __cpp_aggregate_bases 201603L
 #define __FLT128_HAS_DENORM__ 1
@@ -222,6 +223,7 @@
 #define __UINT_LEAST16_TYPE__ short unsigned int
 #define unix 1
 #define __DBL_HAS_DENORM__ 1
+#define __LINUX_PULSE__ 1
 #define __cpp_rtti 199711L
 #define __SIZE_TYPE__ long unsigned int
 #define __UINT64_MAX__ 0xffffffffffffffffUL
@@ -308,6 +310,7 @@
 #define __pic__ 2
 #define __UINTPTR_MAX__ 0xffffffffffffffffUL
 #define __INT_FAST64_WIDTH__ 64
+#define USING_POSIX_THREADS 1
 #define __cpp_decltype 200707L
 #define __INT_FAST64_MAX__ 0x7fffffffffffffffL
 #define __GCC_ATOMIC_TEST_AND_SET_TRUEVAL 1
@@ -394,7 +397,7 @@
 #define __DEC128_MAX_EXP__ 6145
 #define __FLT32X_HAS_QUIET_NAN__ 1
 #define __ATOMIC_CONSUME 1
-#define __GNUC_MINOR__ 2
+#define __GNUC_MINOR__ 3
 #define __GLIBCXX_TYPE_INT_N_0 __int128
 #define __INT_FAST16_WIDTH__ 64
 #define __UINTMAX_MAX__ 0xffffffffffffffffUL

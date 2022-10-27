@@ -1,7 +1,7 @@
 #include "audiobufferrecorder_oboe.h"
-#include "qcoreapplication_platform.h"
 #include <QJniEnvironment>
 #include <QJniObject>
+#include <QCoreApplication>
 
 AudioBufferRecorder::AudioBufferRecorder(QObject *parent)
     : QObject{parent}, m_engine(this)
@@ -25,9 +25,9 @@ requestPermissions(const QStringList &permissions)
             env->SetObjectArrayElement(array, index++, QJniObject::fromString(perm).object());
 
         QJniObject(QNativeInterface::QAndroidApplication::context()).callMethod<void>("requestPermissions",
-                                                                  "([Ljava/lang/String;I)V",
-                                                                  array,
-                                                                  requestCode);
+                                                                                      "([Ljava/lang/String;I)V",
+                                                                                      array,
+                                                                                      requestCode);
         env->DeleteLocalRef(array);
         isFinished = true;
     });
@@ -120,14 +120,13 @@ OboeEngine::OboeEngine(AudioBufferRecorder *p)
         qDebug() << productNameCstr << ", " << id << ", " << audioDevTypeNames[type];
         env->ReleaseStringUTFChars(productNameJstr, productNameCstr);
     }
-    env->DeleteLocalRef(devices);
-    int32_t defaultSamplingRate = 44100;
-
+    //env->DeleteLocalRef(devices);
 }
 
 void OboeEngine::start()
 {
     oboe::AudioStreamBuilder builder;
+    m_p->m_sampleRate = 44100;
     builder.setDeviceId(m_record_device_id)
             ->setDirection(oboe::Direction::Input)
             ->setFormat(oboe::AudioFormat::I16)

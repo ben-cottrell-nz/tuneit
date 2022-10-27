@@ -5,7 +5,11 @@
 	"CMAKE_CURRENT_SOURCE_DIR" : "/home/ben/Documents/projects/TuneIt-Qt-FFTW3",
 	"CMAKE_SOURCE_DIR" : "/home/ben/Documents/projects/TuneIt-Qt-FFTW3",
 	"INCLUDE_DIR" : "/home/ben/Documents/projects/TuneIt-Qt-FFTW3/cmake-build-debug/TuneIt_autogen/include",
-	"INPUTS" : [ "/home/ben/Documents/projects/TuneIt-Qt-FFTW3/main.qml" ],
+	"INPUTS" : 
+	[
+		"/home/ben/Documents/projects/TuneIt-Qt-FFTW3/updateworker.mjs",
+		"/home/ben/Documents/projects/TuneIt-Qt-FFTW3/main.qml"
+	],
 	"LOCK_FILE" : "/home/ben/Documents/projects/TuneIt-Qt-FFTW3/cmake-build-debug/CMakeFiles/TuneIt_autogen.dir/AutoRcc_qml_EWIEGA46WW_Lock.lock",
 	"MULTI_CONFIG" : false,
 	"OPTIONS" : [ "-name", "qml" ],

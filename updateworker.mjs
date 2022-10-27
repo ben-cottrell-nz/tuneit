@@ -3,5 +3,5 @@ WorkerScript.onMessage = function(message) {
 //    for (var i=0;i<message.numFrames;i++) {
 //        fftValues.push(message.outputBufferList[i])
 //    }
-    WorkerScript.sendMessage( { result: fftValues } )
+    WorkerScript.sendMessage( { result: fftValues, peakFreq: message.peakFreq } )
 }

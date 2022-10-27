@@ -1,80 +1,31 @@
 fftw3threads_autogen/timestamp: \
   ../CMakeLists.txt \
+  ../assets.qrc \
   CMakeFiles/3.22.3/CMakeCCompiler.cmake \
   CMakeFiles/3.22.3/CMakeCXXCompiler.cmake \
   CMakeFiles/3.22.3/CMakeSystem.cmake \
+  ../fftw-sources.cmake \
   ../qml.qrc \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCCompiler.cmake.in \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCCompilerABI.c \
   /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCInformation.cmake \
   /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCXXInformation.cmake \
   /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake \
   /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCompilerIdDetection.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CMakeDetermineCCompiler.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CMakeDetermineCompileFeatures.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CMakeDetermineCompiler.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CMakeDetermineCompilerABI.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CMakeDetermineCompilerId.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CMakeFindBinUtils.cmake \
   /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CMakeFindDependencyMacro.cmake \
   /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CMakeGenericSystem.cmake \
   /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake \
   /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake \
   /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CMakeParseArguments.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CMakeParseImplicitIncludeInfo.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CMakeParseImplicitLinkInfo.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CMakeParseLibraryArchitecture.cmake \
   /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake \
   /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CMakeTestCCompiler.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CMakeTestCompilerCommon.cmake \
   /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CheckCSourceCompiles.cmake \
   /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CheckCXXCompilerFlag.cmake \
   /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CheckCXXSourceCompiles.cmake \
   /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CheckIncludeFile.cmake \
   /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CheckLibraryExists.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/ADSP-DetermineCompiler.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/ARMCC-DetermineCompiler.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/ARMClang-DetermineCompiler.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/AppleClang-DetermineCompiler.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/Borland-DetermineCompiler.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/Bruce-C-DetermineCompiler.cmake \
   /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/Clang-DetermineCompiler.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/Clang-DetermineCompilerInternal.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/Compaq-C-DetermineCompiler.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/Cray-DetermineCompiler.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/Embarcadero-DetermineCompiler.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/Fujitsu-DetermineCompiler.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GHS-DetermineCompiler.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU-C-DetermineCompiler.cmake \
   /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU-C.cmake \
   /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU-CXX.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU-FindBinUtils.cmake \
   /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/HP-C-DetermineCompiler.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/IAR-DetermineCompiler.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/Intel-DetermineCompiler.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/MSVC-DetermineCompiler.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/NVHPC-DetermineCompiler.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/NVIDIA-DetermineCompiler.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/PGI-DetermineCompiler.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/PathScale-DetermineCompiler.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/SCO-DetermineCompiler.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/SDCC-C-DetermineCompiler.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/SunPro-C-DetermineCompiler.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/TI-DetermineCompiler.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/Watcom-DetermineCompiler.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/XL-C-DetermineCompiler.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/XLClang-C-DetermineCompiler.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/zOS-C-DetermineCompiler.cmake \
   /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/FeatureSummary.cmake \
   /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/FindOpenGL.cmake \
   /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake \
@@ -84,7 +35,6 @@ fftw3threads_autogen/timestamp: \
   /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/FindVulkan.cmake \
   /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Internal/CheckCompilerFlag.cmake \
   /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Internal/CheckSourceCompiles.cmake \
-  /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Internal/FeatureTesting.cmake \
   /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/MacroAddFileDependencies.cmake \
   /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU-C.cmake \
   /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU-CXX.cmake \

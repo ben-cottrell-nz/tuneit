@@ -13,26 +13,28 @@ Window {
         source: "updateworker.mjs"
         onMessage: (messageObject) => {
                        mycanvas.fftValues = messageObject.result;
+                       mycanvas.peakFreq = messageObject.peakFreq;
                        mycanvas.requestPaint()
                    }
     }
 
     Connections {
         target: fftProcessor
-        function onProcessingDone(numFrames,outputBufferList) {
-            updateWorker.sendMessage({outputBufferList: outputBufferList, numFrames: numFrames })
+        function onProcessingDone(numFrames,peakFreq,outputBufferList) {
+            updateWorker.sendMessage({outputBufferList: outputBufferList, peakFreq, numFrames: numFrames })
         }
     }
 
     Rectangle {
         anchors.fill: parent
         color: "#222"
+
         Text {
             color: "white"
             font.family: "Roboto"
             z: 999
             text: `
-            <h1 style="font-weight: 300; word-spacing: -36pt">C#<sub>4</sub></h1> <i style="font-size: 40%">217.18 Hz</i>
+            <h1 style="font-weight: 300; word-spacing: -36pt">${mycanvas.peakNote}</h1> <i style="font-size: 40%">${mycanvas.peakFreq} Hz</i>
             `
             horizontalAlignment: Text.AlignHCenter
             lineHeight: 0.76
@@ -51,6 +53,8 @@ Window {
             renderTarget: Canvas.FramebufferObject
             renderStrategy: Canvas.Cooperative
             property var fftValues: []
+            property real peakFreq: 0
+            property var peakNote: "?"
 
             function repaint() {
                 var ctx = getContext("2d");

@@ -44,19 +44,32 @@ QList<qreal> FFTFilterProcessor::outputBufferList()
 
 QString FFTFilterProcessor::getPeakScientificNote()
 {
-	return QString();
+    return QString();
 }
 
-void FFTFilterProcessor::processBuffer(int16_t *in, const int numFrames)
+qreal FFTFilterProcessor::getPeakFreq()
+{
+    return m_last_peak_freq;
+}
+
+void FFTFilterProcessor::processBuffer(int16_t *in, const int samplingRate, const int numFrames)
 {
     // https://github.com/audacity/audacity/blob/c5ebc396eb06857b4509101fdd2b0620dc0658b3/src/FFT.cpp#L344
     const double multiplier = 2 * M_PI / numFrames;
     static const double coeff0 = 0.54, coeff1 = -0.46;
+    double highest_value=0;
+    int highest_freq_index=0;
+    double bin_size = samplingRate / numFrames;
     for (int i=0;i<numFrames;i++) {
         m_in_buffer[i] = (double)in[i] / std::numeric_limits<int16_t>::max();
         m_in_buffer[i] *= coeff0 + coeff1 * cos(i * multiplier);
+        if (m_in_buffer[i] > highest_value) {
+            highest_value = m_in_buffer[i];
+            highest_freq_index = i;
+        }
     }
+    m_last_peak_freq = bin_size * highest_freq_index;
     fftw_execute(m_fft_plan);
     m_processed_frames = numFrames;
-    emit processingDone(numFrames, outputBufferList());
+    emit processingDone(numFrames, m_last_peak_freq, outputBufferList());
 }
