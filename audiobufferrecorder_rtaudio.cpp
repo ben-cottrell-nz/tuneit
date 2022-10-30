@@ -17,11 +17,14 @@ bool AudioBufferRecorder::start()
         qDebug() << "rtaudio error, type " << type << ": " << errorText.c_str();
     });
     RtAudio::StreamParameters params;
-    params.deviceId = m_adc.getDefaultInputDevice();
-    params.nChannels = 2;
-    params.firstChannel = 0;
     m_sampleRate = 44100;
-    m_bufferFrames = 256;
+    m_bufferFrames = 1024;
+    m_numChannels = 1;
+    params.deviceId = m_adc.getDefaultInputDevice();
+    params.nChannels = m_numChannels;
+    params.firstChannel = 0;
+    emit numChannelsChanged();
+    emit sampleRateChanged();
     auto recordFun = []( void *outputBuffer, void *inputBuffer, unsigned int nBufferFrames,
             double streamTime, RtAudioStreamStatus status, void *userData ) -> int {
         emit ((AudioBufferRecorder*)userData)->bufferReady((int16_t*)inputBuffer, nBufferFrames);

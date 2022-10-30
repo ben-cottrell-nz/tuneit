@@ -8,6 +8,7 @@
 	"INPUTS" : 
 	[
 		"/home/ben/Documents/projects/TuneIt-Qt-FFTW3/updateworker.mjs",
+		"/home/ben/Documents/projects/TuneIt-Qt-FFTW3/FrequencyPlotView.qml",
 		"/home/ben/Documents/projects/TuneIt-Qt-FFTW3/main.qml"
 	],
 	"LOCK_FILE" : "/home/ben/Documents/projects/TuneIt-Qt-FFTW3/cmake-build-debug/CMakeFiles/TuneIt_autogen.dir/AutoRcc_qml_EWIEGA46WW_Lock.lock",

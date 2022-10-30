@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
                      &AudioBufferRecorder::bufferReady,
                      &app,
                      [&](int16_t* buffer, int numFrames){
-        processor.processBuffer(buffer, recorder.m_sampleRate, numFrames);
+        processor.processBuffer(buffer, recorder.getSampleRate(), numFrames);
     });
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

@@ -5,7 +5,7 @@
 FFTFilterProcessor::FFTFilterProcessor(QObject *parent)
     : QObject{parent}
 {
-    m_buffer_length = 512;
+    m_buffer_length = 2048;
     m_in_buffer = std::vector<double>(m_buffer_length,0);
     m_fft_output = (fftw_complex*)fftw_malloc(sizeof(fftw_complex)*m_buffer_length);
     m_fft_plan = fftw_plan_dft_r2c_1d(m_buffer_length,
