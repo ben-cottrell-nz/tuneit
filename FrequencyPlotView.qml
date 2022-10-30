@@ -7,7 +7,8 @@ Rectangle {
         CircularBars,
         BarChart
     }
-    property int viewMode: 0
+    property var viewModeNames: ["Circular Bars","Horizontal Bar Chart"]
+    property var viewMode: FrequencyPlotView.ViewMode.CircularBars
     onViewModeChanged: function (e) {
         if (viewMode == FrequencyPlotView.ViewMode.CircularBars) {
             mycanvas.paintFunction = mycanvas.repaintCircularBars

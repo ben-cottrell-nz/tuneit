@@ -2,6 +2,7 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Controls.Material 2.15
+import QtQuick.Layouts 2.15
 
 ApplicationWindow {
     id: root
@@ -15,17 +16,30 @@ ApplicationWindow {
     property var peakNote: "?"
     Material.theme: Material.Dark
     Material.accent: Material.Purple
-    ToolBar {
+    header: ToolBar {
         id: toolBar
         z: 99
         anchors.right: parent.right
         anchors.left: parent.left
         contentHeight: toolButton.implicitHeight
-        ToolButton {
-            id: toolButton
-            text: "\u2630 View Selector"
-            onClicked: {
-                drawer.open()
+        RowLayout {
+        anchors.fill: parent
+            ToolButton {
+                id: toolButton
+                text: "\u2630"
+                onClicked: {
+                    drawer.open()
+                }
+            }
+            Label {
+                id: headerLabel
+                elide: Label.ElideRight
+                font.bold: true
+
+                 horizontalAlignment: Qt.AlignHCenter
+                 verticalAlignment: Qt.AlignVCenter
+                 Layout.fillWidth: true
+                text: freqView.viewModeNames[freqView.viewMode]
             }
         }
     }
