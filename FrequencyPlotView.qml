@@ -8,7 +8,7 @@ Rectangle {
         BarChart
     }
     property var viewModeNames: ["Circular Bars","Horizontal Bar Chart"]
-    property var viewMode: FrequencyPlotView.ViewMode.CircularBars
+    property var viewMode: FrequencyPlotView.ViewMode.BarChart
     onViewModeChanged: function (e) {
         if (viewMode == FrequencyPlotView.ViewMode.CircularBars) {
             mycanvas.paintFunction = mycanvas.repaintCircularBars
@@ -48,6 +48,9 @@ Rectangle {
             anchors.fill: parent
             renderTarget: Canvas.FramebufferObject
             renderStrategy: Canvas.Cooperative
+            MouseArea {
+                id: mouseArea
+            }
 
             property var paintFunction: repaintCircularBars
 
@@ -60,16 +63,29 @@ Rectangle {
                 var barSpace = 1
                 var barWidth = (mycanvas.width - numBars * barSpace) / numBars
                 var bottom = mycanvas.height
+                var halfViewHeight = mycanvas.height / 2
                 var fftValues = root.fftValues;
+                var binSize = audioRecorder.samplingRate / fftValues.length
                 var halfFftValuesLength = fftValues.length / 2;
                 var fftValuesLength = fftValues.length;
                 ctx.fillStyle = 'lime'
+                ctx.font = "bold 16px sans-serif"
+                ctx.fillText("Hz", mycanvas.width / 2, halfViewHeight+40)
+                var xPos = 0;
+                var mouseX = mouseArea.mouseX
+                ctx.font = "16px sans-serif";
                 for (var seg=0;seg < numBars; seg++) {
-                    ctx.fillRect(seg * (barWidth + barSpace), bottom,
+                    xPos = seg * (barWidth + barSpace)
+                    ctx.fillRect(xPos, halfViewHeight,
                     barWidth,
                     fftValues[halfFftValuesLength+Math.floor(seg/numBars*halfFftValuesLength)]
-                    * bottom * -1)
+                    * halfViewHeight * -1)
+                    if (seg % 20 == 0) {
+                        ctx.fillText( (Math.floor(seg/numBars*halfFftValuesLength)*binSize).toFixed(2),
+                                     xPos, halfViewHeight + 20)
+                    }
                 }
+
             }
 
             function repaintCircularBars() {

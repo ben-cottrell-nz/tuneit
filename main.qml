@@ -21,14 +21,21 @@ ApplicationWindow {
         z: 99
         anchors.right: parent.right
         anchors.left: parent.left
-        contentHeight: toolButton.implicitHeight
+        contentHeight: buttonShowDrawer.implicitHeight
         RowLayout {
         anchors.fill: parent
             ToolButton {
-                id: toolButton
-                text: "\u2630"
+                id: buttonShowDrawer
+                text: "\u2630 Menu"
                 onClicked: {
                     drawer.open()
+                }
+            }
+            ToolButton {
+                id: buttonShowSettings
+                text: "\u2699 Settings"
+                onClicked: {
+                    settingsDialog.visible = true
                 }
             }
             Label {
@@ -43,6 +50,51 @@ ApplicationWindow {
             }
         }
     }
+    Dialog {
+        id: settingsDialog
+        visible: false
+        title: "Settings"
+        anchors.centerIn: parent
+        standardButtons: Dialog.Ok | Dialog.Cancel
+        width: 0.83*root.width
+        height: 0.83*root.height
+        ColumnLayout {
+            anchors.fill: parent
+            Button {
+                id: buttonRestartAudio
+                Layout.fillWidth: true
+                text: "Restart Audio"
+                onClicked: { audioRecorder.stop(); audioRecorder.start(); }
+            }
+            Label {
+                text: qsTr("Input Device:")
+            }
+            ComboBox {
+                Layout.fillWidth: true
+                model: appSettings.getAvailableInputDevNames()
+//                currentIndex: appSettings.
+            }
+            Label {
+                text: qsTr("Number of Channels:")
+            }
+            ComboBox {
+                Layout.fillWidth: true
+                model: appSettings.getAvailableNumInputChannels()
+//                currentIndex: appSettings.getAvailableNumInputChannels()
+//                .indexOf(appSettings.numInputChannels)
+            }
+            Label {
+                text: qsTr("Sampling Rate:")
+            }
+            ComboBox {
+                Layout.fillWidth: true
+                model: appSettings.getAvailableSamplingRates()
+            }
+        }
+        onAccepted: console.log("Ok clicked")
+        onRejected: console.log("Cancel clicked")
+    }
+
     Drawer {
         id: drawer
         width: root.width * 0.33
@@ -84,23 +136,23 @@ ApplicationWindow {
             updateWorker.sendMessage({outputBufferList: outputBufferList, peakFreq, numFrames: numFrames })
         }
     }
-    Text {
-        id: infoLabel
-        anchors.top: toolBar.bottom
-        font.pixelSize: 16
-        color: "white"
-        z: 99
-        text: audioRecorder != null ?
-`Audio API: ${audioRecorder.apiName != null ? audioRecorder.apiName : "Unknown"}
-Channels: ${audioRecorder.numChannels}
-Sampling Rate: ${audioRecorder.samplingRate}
-Buffer Size: 512
-QSG Rendering API: ${qsgInfo.getRenderingApiName()}
-` : `audioRecorder null
-`
-        //Channels: ${audioRecorder.channelCount} channels
-        //Sampling rate: ${audioRecorder.samplingRate}`
-    }
+//    Text {
+//        id: infoLabel
+//        anchors.top: toolBar.bottom
+//        font.pixelSize: 16
+//        color: "white"
+//        z: 99
+//        text: audioRecorder != null ?
+//`Audio API: ${audioRecorder.apiName != null ? audioRecorder.apiName : "Unknown"}
+//Channels: ${audioRecorder.numChannels}
+//Sampling Rate: ${audioRecorder.samplingRate}
+//Buffer Size: 512
+//QSG Rendering API: ${qsgInfo.getRenderingApiName()}
+//` : `audioRecorder null
+//`
+//        //Channels: ${audioRecorder.channelCount} channels
+//        //Sampling rate: ${audioRecorder.samplingRate}`
+//    }
     FrequencyPlotView { id: freqView }
 
     /*##^##

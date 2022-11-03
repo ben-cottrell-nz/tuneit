@@ -11,14 +11,15 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Quick Gui)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Quick Gui)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Quick Gui Xml)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Quick Gui Xml)
 
 set(PROJECT_SOURCES
         main.cpp
         qml.qrc
         assets.qrc
         fftfilterprocessor.cpp
+        appsettings.cpp
 )
 if (${ANDROID})
     add_compile_definitions(USING_POSIX_THREADS=1)
@@ -135,7 +136,7 @@ elseif (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 	  fftw3dft
 	  fftw3rdft
 	  ${AUDIO_API_LIBS}
-                Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick Qt${QT_VERSION_MAJOR}::Gui
+                Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Xml
 	)
 elseif (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
 	target_link_libraries(TuneIt
@@ -144,7 +145,7 @@ elseif (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
 	  libfftw3l-3
 	  libfftw3f-3
 	  ${AUDIO_API_LIBS}
-                Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick Qt${QT_VERSION_MAJOR}::Gui
+                Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Xml
 	)
 	add_custom_command(TARGET TuneIt
 	POST_BUILD

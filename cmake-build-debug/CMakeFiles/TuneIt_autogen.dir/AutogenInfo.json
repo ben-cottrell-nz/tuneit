@@ -478,6 +478,40 @@
 		"/home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Gui/Qt6GuiTargets.cmake",
 		"/home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Gui/Qt6GuiAdditionalTargetInfo.cmake",
 		"/home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Gui/Qt6GuiVersionlessTargets.cmake",
+		"/home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Xml/Qt6XmlConfigVersion.cmake",
+		"/home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Xml/Qt6XmlConfigVersionImpl.cmake",
+		"/home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Xml/Qt6XmlConfig.cmake",
+		"/home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CMakeFindDependencyMacro.cmake",
+		"/home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Xml/Qt6XmlDependencies.cmake",
+		"/home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6/Qt6ConfigVersion.cmake",
+		"/home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6/Qt6ConfigVersionImpl.cmake",
+		"/home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6/Qt6Config.cmake",
+		"/home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6/Qt6ConfigExtras.cmake",
+		"/home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6/QtPublicCMakeVersionHelpers.cmake",
+		"/home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6/Qt6Targets.cmake",
+		"/home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6/Qt6VersionlessTargets.cmake",
+		"/home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6/QtFeature.cmake",
+		"/home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6/QtFeatureCommon.cmake",
+		"/home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CheckCXXCompilerFlag.cmake",
+		"/home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6/QtPublicFinalizerHelpers.cmake",
+		"/home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6/QtPublicPluginHelpers.cmake",
+		"/home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6/QtPublicTargetHelpers.cmake",
+		"/home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6/QtPublicWalkLibsHelpers.cmake",
+		"/home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6/QtPublicFindPackageHelpers.cmake",
+		"/home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake",
+		"/home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6/QtPublicCMakeHelpers.cmake",
+		"/home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CMakeFindDependencyMacro.cmake",
+		"/home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6/Qt6Dependencies.cmake",
+		"/home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/FindThreads.cmake",
+		"/home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CheckLibraryExists.cmake",
+		"/home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CheckIncludeFile.cmake",
+		"/home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/CheckCSourceCompiles.cmake",
+		"/home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake",
+		"/home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/share/cmake-3.22/Modules/FindPackageMessage.cmake",
+		"/home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Xml/Qt6XmlTargets.cmake",
+		"/home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Xml/Qt6XmlTargets-relwithdebinfo.cmake",
+		"/home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Xml/Qt6XmlAdditionalTargetInfo.cmake",
+		"/home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Xml/Qt6XmlVersionlessTargets.cmake",
 		"/home/ben/Documents/projects/TuneIt-Qt-FFTW3/fftw-sources.cmake",
 		"/home/ben/Documents/projects/TuneIt-Qt-FFTW3/qml.qrc",
 		"/home/ben/Documents/projects/TuneIt-Qt-FFTW3/assets.qrc"
@@ -487,6 +521,12 @@
 	"DEP_FILE_RULE_NAME" : "TuneIt_autogen/timestamp",
 	"HEADERS" : 
 	[
+		[
+			"/home/ben/Documents/projects/TuneIt-Qt-FFTW3/appsettings.h",
+			"MU",
+			"EWIEGA46WW/moc_appsettings.cpp",
+			null
+		],
 		[
 			"/home/ben/Documents/projects/TuneIt-Qt-FFTW3/audiobufferrecorder_rtaudio.h",
 			"MU",
@@ -512,6 +552,7 @@
 		"QT_QMLMODELS_LIB",
 		"QT_QML_LIB",
 		"QT_QUICK_LIB",
+		"QT_XML_LIB",
 		"USING_POSIX_THREADS=1",
 		"__LINUX_ALSA__=1",
 		"__LINUX_PULSE__=1"
@@ -538,6 +579,7 @@
 		"/home/ben/Qt/6.2.4/gcc_64/include/QtNetwork",
 		"/home/ben/Qt/6.2.4/gcc_64/include/QtQmlModels",
 		"/home/ben/Qt/6.2.4/gcc_64/include/QtOpenGL",
+		"/home/ben/Qt/6.2.4/gcc_64/include/QtXml",
 		"/usr/include",
 		"/usr/include/c++/11",
 		"/usr/include/x86_64-linux-gnu/c++/11",
@@ -579,6 +621,11 @@
 	"SETTINGS_FILE" : "/home/ben/Documents/projects/TuneIt-Qt-FFTW3/cmake-build-debug/CMakeFiles/TuneIt_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
+		[
+			"/home/ben/Documents/projects/TuneIt-Qt-FFTW3/appsettings.cpp",
+			"MU",
+			null
+		],
 		[
 			"/home/ben/Documents/projects/TuneIt-Qt-FFTW3/audiobufferrecorder_rtaudio.cpp",
 			"MU",

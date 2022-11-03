@@ -1,0 +1,1 @@
+del %HomePath%\Desktop\tuneit-build\CMakeCache.txt && cmake -B %HomePath%\Desktop\tuneit-build -DCMAKE_PREFIX_PATH=C:\qt-6.2.4-static-msvc19-release -D CMAKE_MSVC_RUNTIME_LIBRARY=MultiThreadededDLL TuneIt-Qt-FFTW3\ && cmake --build %HomePath%\Desktop\tuneit-build

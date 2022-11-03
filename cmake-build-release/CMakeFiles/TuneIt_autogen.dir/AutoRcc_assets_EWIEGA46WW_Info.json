@@ -1,0 +1,19 @@
+{
+	"BUILD_DIR" : "/home/ben/Documents/projects/TuneIt-Qt-FFTW3/cmake-build-release/TuneIt_autogen",
+	"CMAKE_BINARY_DIR" : "/home/ben/Documents/projects/TuneIt-Qt-FFTW3/cmake-build-release",
+	"CMAKE_CURRENT_BINARY_DIR" : "/home/ben/Documents/projects/TuneIt-Qt-FFTW3/cmake-build-release",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/home/ben/Documents/projects/TuneIt-Qt-FFTW3",
+	"CMAKE_SOURCE_DIR" : "/home/ben/Documents/projects/TuneIt-Qt-FFTW3",
+	"INCLUDE_DIR" : "/home/ben/Documents/projects/TuneIt-Qt-FFTW3/cmake-build-release/TuneIt_autogen/include",
+	"INPUTS" : [],
+	"LOCK_FILE" : "/home/ben/Documents/projects/TuneIt-Qt-FFTW3/cmake-build-release/CMakeFiles/TuneIt_autogen.dir/AutoRcc_assets_EWIEGA46WW_Lock.lock",
+	"MULTI_CONFIG" : false,
+	"OPTIONS" : [ "-name", "assets" ],
+	"OUTPUT_CHECKSUM" : "EWIEGA46WW",
+	"OUTPUT_NAME" : "qrc_assets.cpp",
+	"RCC_EXECUTABLE" : "/home/ben/Qt/6.2.4/gcc_64/./libexec/rcc",
+	"RCC_LIST_OPTIONS" : [ "--list" ],
+	"SETTINGS_FILE" : "/home/ben/Documents/projects/TuneIt-Qt-FFTW3/cmake-build-release/CMakeFiles/TuneIt_autogen.dir/AutoRcc_assets_EWIEGA46WW_Used.txt",
+	"SOURCE" : "/home/ben/Documents/projects/TuneIt-Qt-FFTW3/assets.qrc",
+	"VERBOSITY" : 0
+}

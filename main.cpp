@@ -10,6 +10,9 @@
 #endif
 #include <QThread>
 #include "fftfilterprocessor.h"
+#include "appsettings.h"
+#include <QRegularExpression>
+
 
 class QSGInfo : public QObject
 {
@@ -51,7 +54,7 @@ int main(int argc, char *argv[])
                      &AudioBufferRecorder::bufferReady,
                      &app,
                      [&](int16_t* buffer, int numFrames){
-        processor.processBuffer(buffer, recorder.getSampleRate(), numFrames);
+        processor.processBuffer(buffer, AppSettingsInstance()->getSamplingRate(), numFrames);
     });
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
@@ -62,7 +65,23 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("fftProcessor", &processor);
     engine.rootContext()->setContextProperty("audioRecorder", &recorder);
     engine.rootContext()->setContextProperty("qsgInfo", &qsgInfo);
+    engine.rootContext()->setContextProperty("appSettings", AppSettingsInstance());
+    if (!AppSettingsInstance()->isFirstRun()) {
+        AppSettingsInstance()->loadFromDefaultLocation();
+    }
     engine.load(url);
+    QObject::connect(AppSettingsInstance(), &AppSettings::settingsApplied, &app, [&](){
+        recorder.stop();
+        recorder.start();
+//        AppSettings* settings = AppSettingsInstance();
+//        QString audioDevName = settings->getAudioInputDeviceName();
+//        int lBracketIndex = audioDevName.indexOf('(');
+//        int rBracketIndex = audioDevName.indexOf(')');
+//        int deviceID = 0;
+//        if (lBracketIndex != -1 && rBracketIndex != -1) {
+//            deviceID = audioDevName.sliced(lBracketIndex+1, rBracketIndex-lBracketIndex-1).toUInt();
+//        }
+    });
     QThread* audioThread/* = new QThread(&app);*/;
     audioThread = QThread::create([&](){
         recorder.start();
@@ -70,6 +89,7 @@ int main(int argc, char *argv[])
     audioThread->start();
     QObject::connect(&app, &QCoreApplication::aboutToQuit, &app, [&](){
         recorder.stop();
+        AppSettingsInstance()->saveToDefaultLocation();
         audioThread->deleteLater();
     });
     return app.exec();

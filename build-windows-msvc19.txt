@@ -1,0 +1,2 @@
+cmake -DCMAKE_PREFIX_PATH=c:\qt-6.2.4-static-msvc19-release -B C:\Users\ben\Desktop\tuneit-build -GNinja -DCMAKE_BUILD_TYPE=Release TuneIt-Qt-FFTW3
+cmake --build C:\Users\Ben\Desktop\tuneit-build\ -j4 --config Release

@@ -303,6 +303,9 @@ Qt6Qml_DIR:PATH=/home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Qml
 //The directory containing a CMake configuration file for Qt6Quick.
 Qt6Quick_DIR:PATH=/home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Quick
 
+//The directory containing a CMake configuration file for Qt6Xml.
+Qt6Xml_DIR:PATH=/home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Xml
+
 //The directory containing a CMake configuration file for Qt6.
 Qt6_DIR:PATH=/home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6
 
@@ -679,6 +682,8 @@ QT_FEATURE_directwrite3:INTERNAL=OFF
 QT_FEATURE_dlopen:INTERNAL=ON
 //Qt feature: dnslookup (from target Qt6::Network)
 QT_FEATURE_dnslookup:INTERNAL=ON
+//Qt feature: dom (from target Qt6::Xml)
+QT_FEATURE_dom:INTERNAL=ON
 //Qt feature: doubleconversion (from target Qt6::Core)
 QT_FEATURE_doubleconversion:INTERNAL=ON
 //Qt feature: draganddrop (from target Qt6::Gui)

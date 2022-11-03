@@ -1,6 +1,8 @@
 TuneIt_autogen/timestamp: \
   ../CMakeLists.txt \
   ../RtAudio.h \
+  ../appsettings.cpp \
+  ../appsettings.h \
   ../assets.qrc \
   ../audiobufferrecorder_rtaudio.cpp \
   ../audiobufferrecorder_rtaudio.h \
@@ -51,12 +53,14 @@ TuneIt_autogen/timestamp: \
   /home/ben/Downloads/fftw-3.3.10/api/fftw3.h \
   /home/ben/Qt/6.2.4/gcc_64/include/QtCore/QDebug \
   /home/ben/Qt/6.2.4/gcc_64/include/QtCore/QEvent \
+  /home/ben/Qt/6.2.4/gcc_64/include/QtCore/QHash \
   /home/ben/Qt/6.2.4/gcc_64/include/QtCore/QList \
   /home/ben/Qt/6.2.4/gcc_64/include/QtCore/QMargins \
   /home/ben/Qt/6.2.4/gcc_64/include/QtCore/QMetaType \
   /home/ben/Qt/6.2.4/gcc_64/include/QtCore/QObject \
   /home/ben/Qt/6.2.4/gcc_64/include/QtCore/QRect \
   /home/ben/Qt/6.2.4/gcc_64/include/QtCore/QRectF \
+  /home/ben/Qt/6.2.4/gcc_64/include/QtCore/QRegularExpression \
   /home/ben/Qt/6.2.4/gcc_64/include/QtCore/QSize \
   /home/ben/Qt/6.2.4/gcc_64/include/QtCore/QSizeF \
   /home/ben/Qt/6.2.4/gcc_64/include/QtCore/QThread \
@@ -123,6 +127,7 @@ TuneIt_autogen/timestamp: \
   /home/ben/Qt/6.2.4/gcc_64/include/QtCore/qprocessordetection.h \
   /home/ben/Qt/6.2.4/gcc_64/include/QtCore/qrect.h \
   /home/ben/Qt/6.2.4/gcc_64/include/QtCore/qrefcount.h \
+  /home/ben/Qt/6.2.4/gcc_64/include/QtCore/qregularexpression.h \
   /home/ben/Qt/6.2.4/gcc_64/include/QtCore/qscopedpointer.h \
   /home/ben/Qt/6.2.4/gcc_64/include/QtCore/qscopeguard.h \
   /home/ben/Qt/6.2.4/gcc_64/include/QtCore/qset.h \
@@ -345,6 +350,14 @@ TuneIt_autogen/timestamp: \
   /home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Quick/Qt6QuickTargets-relwithdebinfo.cmake \
   /home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Quick/Qt6QuickTargets.cmake \
   /home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Quick/Qt6QuickVersionlessTargets.cmake \
+  /home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Xml/Qt6XmlAdditionalTargetInfo.cmake \
+  /home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Xml/Qt6XmlConfig.cmake \
+  /home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Xml/Qt6XmlConfigVersion.cmake \
+  /home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Xml/Qt6XmlConfigVersionImpl.cmake \
+  /home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Xml/Qt6XmlDependencies.cmake \
+  /home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Xml/Qt6XmlTargets-relwithdebinfo.cmake \
+  /home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Xml/Qt6XmlTargets.cmake \
+  /home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Xml/Qt6XmlVersionlessTargets.cmake \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \

@@ -174,4 +174,12 @@ fftw3threads_autogen/timestamp: \
   /home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Quick/Qt6QuickTargets-relwithdebinfo.cmake \
   /home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Quick/Qt6QuickTargets.cmake \
   /home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Quick/Qt6QuickVersionlessTargets.cmake \
+  /home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Xml/Qt6XmlAdditionalTargetInfo.cmake \
+  /home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Xml/Qt6XmlConfig.cmake \
+  /home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Xml/Qt6XmlConfigVersion.cmake \
+  /home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Xml/Qt6XmlConfigVersionImpl.cmake \
+  /home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Xml/Qt6XmlDependencies.cmake \
+  /home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Xml/Qt6XmlTargets-relwithdebinfo.cmake \
+  /home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Xml/Qt6XmlTargets.cmake \
+  /home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Xml/Qt6XmlVersionlessTargets.cmake \
   /home/ben/Downloads/CLion-2022.1.3/clion-2022.1.3/bin/cmake/linux/bin/cmake

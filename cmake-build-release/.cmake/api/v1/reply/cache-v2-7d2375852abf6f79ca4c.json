@@ -43,7 +43,7 @@
 				}
 			],
 			"type" : "STRING",
-			"value" : "Debug"
+			"value" : "Release"
 		},
 		{
 			"name" : "CMAKE_CACHEFILE_DIR",
@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/ben/Documents/projects/TuneIt-Qt-FFTW3/cmake-build-debug"
+			"value" : "/home/ben/Documents/projects/TuneIt-Qt-FFTW3/cmake-build-release"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -2648,6 +2648,18 @@
 				{
 					"name" : "HELPSTRING",
 					"value" : "Qt feature: dnslookup (from target Qt6::Network)"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "ON"
+		},
+		{
+			"name" : "QT_FEATURE_dom",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Qt feature: dom (from target Qt6::Xml)"
 				}
 			],
 			"type" : "INTERNAL",
@@ -6050,6 +6062,18 @@
 			"value" : "/home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Quick"
 		},
 		{
+			"name" : "Qt6Xml_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for Qt6Xml."
+				}
+			],
+			"type" : "PATH",
+			"value" : "/home/ben/Qt/6.2.4/gcc_64/lib/cmake/Qt6Xml"
+		},
+		{
 			"name" : "Qt6_DIR",
 			"properties" : 
 			[
@@ -6071,7 +6095,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/ben/Documents/projects/TuneIt-Qt-FFTW3/cmake-build-debug"
+			"value" : "/home/ben/Documents/projects/TuneIt-Qt-FFTW3/cmake-build-release"
 		},
 		{
 			"name" : "TuneIt_IS_TOP_LEVEL",

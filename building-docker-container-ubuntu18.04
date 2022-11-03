@@ -1,0 +1,1 @@
+cmake -D CMAKE_PREFIX_PATH=/opt/qt-6.2.3-static-gcc64-linux -B tuneit-build-ubuntu18.04 -D FFTW3_ROOT_DIR=/documents/fftw-3.3.10 -D NO_MOLD=1  -D CMAKE_CXX_COMPILER=/usr/bin/clang-10 -D CMAKE_C_COMPILER=/usr/bin/clang-10 TuneIt-Qt-FFTW3/
