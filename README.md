@@ -8,6 +8,9 @@ Please provide feedback through issue tickets.
 <img alt="Screenshot showing the Circular Bars" src="screenshots/2.png" width="256" height="256"/>
 <img alt="Screenshot showing the Settings Dialog" src="screenshots/3.png" width="256" height="256"/>
 
+## License
+All source code is provided with the license of the GNU GPLv3, as described in COPYING.
+
 ## FAQ
 *Why combine the sources for FFTW3 and other libraries, instead of building and linking against their products seperately?*
 
