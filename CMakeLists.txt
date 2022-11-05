@@ -21,13 +21,15 @@ set(PROJECT_SOURCES
         fftfilterprocessor.cpp
         appsettings.cpp
 )
+if (NOT DEFINED FFTW3_ROOT_DIR)
+  set(FFTW3_ROOT_DIR /home/ben/Downloads/fftw-3.3.10)
+endif()
 if (${ANDROID})
     add_compile_definitions(USING_POSIX_THREADS=1)
     set(OBOE_DIR /home/ben/Documents/git-repos/oboe)
     include(oboe.cmake)
     set(AUDIO_API_LIBS oboe)
     set(PROJECT_SOURCES audiobufferrecorder_oboe.cpp ${PROJECT_SOURCES})
-    set(FFTW3_ROOT_DIR /home/ben/Downloads/fftw-3.3.10)
     set(CMAKE_EXE_LINKER_FLAGS -fuse-ld=mold)
 
     include(fftw-sources.cmake)
@@ -44,9 +46,6 @@ elseif (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
     add_library(rtaudio STATIC ${RTAUDIO_SOURCES})
     set(AUDIO_API_LIBS asound rtaudio pulse pulse-simple)
     set(PROJECT_SOURCES audiobufferrecorder_rtaudio.cpp ${PROJECT_SOURCES})
-    if (NOT DEFINED FFTW3_ROOT_DIR)
-      set(FFTW3_ROOT_DIR /home/ben/Downloads/fftw-3.3.10)
-    endif()
     if (NOT DEFINED NO_MOLD)
       set(CMAKE_EXE_LINKER_FLAGS -fuse-ld=mold)
     endif()
@@ -65,7 +64,9 @@ elseif (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
 	set(AUDIO_API_LIBS rtaudio)
 	set(PROJECT_SOURCES audiobufferrecorder_rtaudio.cpp
 	${PROJECT_SOURCES})
-	set(FFTW3_ROOT_DIR E:/Downloads/fftw-3.3.5-dll64)
+  if (NOT DEFINED FFTW3_ROOT_DIR)
+    set(FFTW3_ROOT_DIR E:/Downloads/fftw-3.3.5-dll64)
+  endif()
 	include_directories(${FFTW3_ROOT_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
         #Needed when linking against static Qt libraries, MSVC2019
 	set(CMAKE_MSVC_RUNTIME_LIBRARY MultiThreadedDLL)
@@ -124,7 +125,7 @@ if (ANDROID)
       fftw3dft
       fftw3rdft
       ${AUDIO_API_LIBS}
-            Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick Qt${QT_VERSION_MAJOR}::Gui
+            Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Xml
     )
 elseif (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 	target_link_libraries(TuneIt

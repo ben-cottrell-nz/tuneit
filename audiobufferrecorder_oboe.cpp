@@ -2,6 +2,7 @@
 #include <QJniEnvironment>
 #include <QJniObject>
 #include <QCoreApplication>
+#include "appsettings.h"
 
 AudioBufferRecorder::AudioBufferRecorder(QObject *parent)
     : QObject{parent}, m_engine(this)
@@ -109,6 +110,7 @@ OboeEngine::OboeEngine(AudioBufferRecorder *p)
     jobject info = env->GetObjectArrayElement(devices, 0);
     jint id = env->CallIntMethod(info, methodGetId);
     m_record_device_id = id;
+    QString devName;
     for (int i=0; i < numDevices; i++) {
         jobject info = env->GetObjectArrayElement(devices, i);
         jobject productName = env->CallObjectMethod(info, methodGetProductName);
@@ -116,9 +118,21 @@ OboeEngine::OboeEngine(AudioBufferRecorder *p)
                                                         methodToString);
         const char* productNameCstr = env->GetStringUTFChars(productNameJstr, 0);
         jint id = env->CallIntMethod(info, methodGetId);
-        jint type = env->CallIntMethod(info, methodGetType);
-        qDebug() << productNameCstr << ", " << id << ", " << audioDevTypeNames[type];
-        env->ReleaseStringUTFChars(productNameJstr, productNameCstr);
+        if (id == m_record_device_id) {
+            jint type = env->CallIntMethod(info, methodGetType);
+            qDebug() << productNameCstr << ", " << id << ", " << audioDevTypeNames[type];
+            devName = QString("%1 (%2)").arg(productNameCstr).arg(id);
+            env->ReleaseStringUTFChars(productNameJstr, productNameCstr);
+            break;
+        }
+    }
+    using std::move;
+    AppSettings* appSettings = AppSettingsInstance();
+    if (appSettings->isFirstRun()) {
+        appSettings->setAudioInputDeviceName(devName);
+        m_sample_rate = 44100;
+        appSettings->setSamplingRate(m_sample_rate);
+        appSettings->setNumInputChannels(1);
     }
     //env->DeleteLocalRef(devices);
 }
@@ -126,13 +140,12 @@ OboeEngine::OboeEngine(AudioBufferRecorder *p)
 void OboeEngine::start()
 {
     oboe::AudioStreamBuilder builder;
-    m_p->m_sampleRate = 44100;
     builder.setDeviceId(m_record_device_id)
             ->setDirection(oboe::Direction::Input)
             ->setFormat(oboe::AudioFormat::I16)
             ->setFormatConversionAllowed(true)
             ->setPerformanceMode(oboe::PerformanceMode::LowLatency)
-            ->setSampleRate(44100)
+            ->setSampleRate(m_sample_rate)
             ->setChannelCount(1)
             ->setDataCallback(this)
             ->openStream(m_record_stream);

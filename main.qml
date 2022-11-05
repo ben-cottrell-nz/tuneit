@@ -58,20 +58,36 @@ ApplicationWindow {
         standardButtons: Dialog.Ok | Dialog.Cancel
         width: 0.83*root.width
         height: 0.83*root.height
+        ScrollView {
+            width: parent.width
+            height: parent.height
+            contentWidth: column.width
+            contentHeight: column.height
+            clip: true
         ColumnLayout {
-            anchors.fill: parent
-            Button {
-                id: buttonRestartAudio
+                id: column
+                width: settingsDialog.width * 0.8
+            Row {
+                spacing: 5
                 Layout.fillWidth: true
-                text: "Restart Audio"
-                onClicked: { audioRecorder.stop(); audioRecorder.start(); }
+                Button {
+                    id: buttonRestartAudio
+    //                Layout.fillWidth: true
+                    text: "Restart Audio"
+                    onClicked: { audioRecorder.stop(); audioRecorder.start(); }
+                }
+                Button {
+                    id: buttonResetToDefaultSettings
+                    text: "Reset to Default Settings"
+                }
             }
             Label {
                 text: qsTr("Input Device:")
             }
             ComboBox {
                 Layout.fillWidth: true
-                model: appSettings.getAvailableInputDevNames()
+                model: [appSettings.audioInputDeviceName]
+//                model: appSettings.getAvailableInputDevNames()
 //                currentIndex: appSettings.
             }
             Label {
@@ -79,7 +95,8 @@ ApplicationWindow {
             }
             ComboBox {
                 Layout.fillWidth: true
-                model: appSettings.getAvailableNumInputChannels()
+                model: [appSettings.numInputChannels]
+//                model: appSettings.getAvailableNumInputChannels()
 //                currentIndex: appSettings.getAvailableNumInputChannels()
 //                .indexOf(appSettings.numInputChannels)
             }
@@ -88,8 +105,9 @@ ApplicationWindow {
             }
             ComboBox {
                 Layout.fillWidth: true
-                model: appSettings.getAvailableSamplingRates()
+                model: [appSettings.samplingRate]
             }
+        }
         }
         onAccepted: console.log("Ok clicked")
         onRejected: console.log("Cancel clicked")
@@ -136,29 +154,5 @@ ApplicationWindow {
             updateWorker.sendMessage({outputBufferList: outputBufferList, peakFreq, numFrames: numFrames })
         }
     }
-//    Text {
-//        id: infoLabel
-//        anchors.top: toolBar.bottom
-//        font.pixelSize: 16
-//        color: "white"
-//        z: 99
-//        text: audioRecorder != null ?
-//`Audio API: ${audioRecorder.apiName != null ? audioRecorder.apiName : "Unknown"}
-//Channels: ${audioRecorder.numChannels}
-//Sampling Rate: ${audioRecorder.samplingRate}
-//Buffer Size: 512
-//QSG Rendering API: ${qsgInfo.getRenderingApiName()}
-//` : `audioRecorder null
-//`
-//        //Channels: ${audioRecorder.channelCount} channels
-//        //Sampling rate: ${audioRecorder.samplingRate}`
-//    }
     FrequencyPlotView { id: freqView }
-
-    /*##^##
-    Designer {
-        D{i:0;autoSize:true;formeditorZoom:0.33;height:480;width:640}
-    }
-    ##^##*/
-
 }

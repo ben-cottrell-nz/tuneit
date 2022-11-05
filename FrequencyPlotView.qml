@@ -65,7 +65,7 @@ Rectangle {
                 var bottom = mycanvas.height
                 var halfViewHeight = mycanvas.height / 2
                 var fftValues = root.fftValues;
-                var binSize = audioRecorder.samplingRate / fftValues.length
+                var binSize = appSettings.samplingRate / fftValues.length
                 var halfFftValuesLength = fftValues.length / 2;
                 var fftValuesLength = fftValues.length;
                 ctx.fillStyle = 'lime'
