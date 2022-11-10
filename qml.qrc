@@ -3,5 +3,6 @@
         <file>main.qml</file>
         <file>FrequencyPlotView.qml</file>
         <file>updateworker.mjs</file>
+        <file>SettingsDialog.qml</file>
     </qresource>
 </RCC>

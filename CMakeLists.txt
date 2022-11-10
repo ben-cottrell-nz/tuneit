@@ -21,10 +21,10 @@ set(PROJECT_SOURCES
         fftfilterprocessor.cpp
         appsettings.cpp
 )
-if (NOT DEFINED FFTW3_ROOT_DIR)
-  set(FFTW3_ROOT_DIR /home/ben/Downloads/fftw-3.3.10)
-endif()
 if (${ANDROID})
+	if (NOT DEFINED FFTW3_ROOT_DIR)
+	  set(FFTW3_ROOT_DIR /home/ben/Downloads/fftw-3.3.10)
+	endif()
     add_compile_definitions(USING_POSIX_THREADS=1)
     set(OBOE_DIR /home/ben/Documents/git-repos/oboe)
     include(oboe.cmake)
@@ -41,6 +41,9 @@ if (${ANDROID})
     add_library(fftw3dft STATIC  ${FFTW3_DFT_SOURCES})
     add_library(fftw3rdft STATIC  ${FFTW3_RDFT_SOURCES})
 elseif (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+	if (NOT DEFINED FFTW3_ROOT_DIR)
+	  set(FFTW3_ROOT_DIR /home/ben/Downloads/fftw-3.3.10)
+	endif()
     add_compile_definitions(__LINUX_ALSA__=1 __LINUX_PULSE__=1 USING_POSIX_THREADS=1)
 	set(RTAUDIO_SOURCES RtAudio.cpp)
     add_library(rtaudio STATIC ${RTAUDIO_SOURCES})
@@ -78,8 +81,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ${PROJECT_SOURCES}
     )
 # Define target properties for Android with Qt 6 as:
-#    set_property(TARGET TuneIt APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
-#                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
+set_property(TARGET TuneIt APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
+             ${CMAKE_CURRENT_SOURCE_DIR}/android)
 # For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
 else()
     if(ANDROID)
@@ -114,8 +117,6 @@ elseif (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
 endif()
 
 if (ANDROID)
-    set_property(TARGET TuneIt APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
-                     ${CMAKE_CURRENT_SOURCE_DIR}/android)
     target_link_libraries(TuneIt
             PRIVATE
       fftw3api

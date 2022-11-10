@@ -10,6 +10,10 @@ class AppSettings : public QObject
 {
     Q_OBJECT
 public:
+    enum BarChartHorizontalScaling {
+      Linear, Logarithmic
+    };
+    Q_ENUM(BarChartHorizontalScaling)
     Q_PROPERTY(QString audioInputDeviceName
                READ getAudioInputDeviceName
                WRITE setAudioInputDeviceName
@@ -23,6 +27,8 @@ public:
                READ getSamplingRate
                WRITE setSamplingRate
                NOTIFY samplingRateChanged)
+    Q_PROPERTY(BarChartHorizontalScaling barChartHorizontalScaling
+               READ getBarChartHorizontalScaling)
     explicit AppSettings(QObject *parent = nullptr);
     //called when app is starting
     void loadFromDefaultLocation();
@@ -36,6 +42,7 @@ public:
     void setNumInputChannels(uint32_t value);
     uint32_t getSamplingRate();
     void setSamplingRate(uint32_t value);
+    BarChartHorizontalScaling getBarChartHorizontalScaling();
     //lists of options
     Q_INVOKABLE QList<QString> getAvailableInputDevNames();
     Q_INVOKABLE QList<uint32_t> getAvailableNumInputChannels();
@@ -53,6 +60,7 @@ signals:
     void samplingRateChanged(uint32_t value);
 private:
     QString m_configFilePath;
+    BarChartHorizontalScaling m_barChartHorizontalScaling = BarChartHorizontalScaling::Linear;
     //device name with id in brackets
     //these are changed when the configuration data has been parsed from a
     //file, or set by AudioBufferRecord::start when the file doesn't exist.

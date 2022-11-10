@@ -102,6 +102,11 @@ void AppSettings::setSamplingRate(uint32_t value)
     emit samplingRateChanged(m_samplingRate);
 }
 
+AppSettings::BarChartHorizontalScaling AppSettings::getBarChartHorizontalScaling()
+{
+    return m_barChartHorizontalScaling;
+}
+
 QList<QString> AppSettings::getAvailableInputDevNames()
 {
     return m_availableInputDevNames;
