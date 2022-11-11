@@ -111,12 +111,15 @@ OboeEngine::OboeEngine(AudioBufferRecorder *p)
     jint id = env->CallIntMethod(info, methodGetId);
     m_record_device_id = id;
     QString devName;
+    QList<QString> audioDevNames;
+    QList<uint32_t> samplingRates = {44100};
     for (int i=0; i < numDevices; i++) {
         jobject info = env->GetObjectArrayElement(devices, i);
         jobject productName = env->CallObjectMethod(info, methodGetProductName);
         jstring productNameJstr = (jstring)env->CallObjectMethod(productName,
                                                         methodToString);
         const char* productNameCstr = env->GetStringUTFChars(productNameJstr, 0);
+        audioDevNames.push_back(productNameCstr);
         jint id = env->CallIntMethod(info, methodGetId);
         if (id == m_record_device_id) {
             jint type = env->CallIntMethod(info, methodGetType);
@@ -128,6 +131,8 @@ OboeEngine::OboeEngine(AudioBufferRecorder *p)
     }
     using std::move;
     AppSettings* appSettings = AppSettingsInstance();
+    appSettings->setAvailableInputDevNames(move(audioDevNames));
+    appSettings->setAvailableSamplingRates(move(samplingRates));
     if (appSettings->isFirstRun()) {
         appSettings->setAudioInputDeviceName(devName);
         m_sample_rate = 44100;

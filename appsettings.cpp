@@ -2,6 +2,7 @@
 #include <QStandardPaths>
 #include <QDir>
 #include <QDomDocument>
+#include <QStringListModel>
 
 AppSettings::AppSettings(QObject *parent)
     : QObject{parent}
@@ -157,3 +158,24 @@ AppSettings* AppSettingsInstance()
     static AppSettings instance;
     return &instance;
 }
+
+
+//QModelIndex AppSettingsModel::index(int row, int column, const QModelIndex &parent) const
+//{
+//}
+
+//QModelIndex AppSettingsModel::parent(const QModelIndex &child) const
+//{
+//}
+
+//int AppSettingsModel::rowCount(const QModelIndex &parent) const
+//{
+//}
+
+//int AppSettingsModel::columnCount(const QModelIndex &parent) const
+//{
+//}
+
+//QVariant AppSettingsModel::data(const QModelIndex &index, int role) const
+//{
+//}

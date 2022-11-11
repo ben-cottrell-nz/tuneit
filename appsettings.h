@@ -1,10 +1,25 @@
 #ifndef APPSETTINGS_H
 #define APPSETTINGS_H
-
 #include <QObject>
 #include <QHash>
+#include <QAbstractItemModel>
 
 class AudioBufferRecorder;
+
+//this is exposed to the QML engine, which keeps a track of updates
+//class AppSettingsModel : public QAbstractItemModel
+//{
+//    Q_OBJECT
+//public:
+//    explicit AppSettingsModel
+//    // QAbstractItemModel interface
+//    QModelIndex index(int row, int column, const QModelIndex &parent) const override;
+//    QModelIndex parent(const QModelIndex &child) const override;
+//    int rowCount(const QModelIndex &parent) const override;
+//    int columnCount(const QModelIndex &parent) const override;
+//    QVariant data(const QModelIndex &index, int role) const override;
+//};
+
 
 class AppSettings : public QObject
 {
@@ -29,6 +44,13 @@ public:
                NOTIFY samplingRateChanged)
     Q_PROPERTY(BarChartHorizontalScaling barChartHorizontalScaling
                READ getBarChartHorizontalScaling)
+    //available settings properties
+    Q_PROPERTY(QList<QString> availableInputDevNames
+               READ getAvailableInputDevNames
+               NOTIFY availableInputDevNamesChanged)
+    Q_PROPERTY(QList<uint32_t> availableSamplingRates
+               READ getAvailableSamplingRates
+               NOTIFY availableSamplingRatesChanged)
     explicit AppSettings(QObject *parent = nullptr);
     //called when app is starting
     void loadFromDefaultLocation();
@@ -58,6 +80,8 @@ signals:
     void audioInputDeviceNameChanged(QString& value);
     void numInputChannelsChanged(uint32_t value);
     void samplingRateChanged(uint32_t value);
+    void availableInputDevNamesChanged(QString value);
+    void availableSamplingRatesChanged(uint32_t value);
 private:
     QString m_configFilePath;
     BarChartHorizontalScaling m_barChartHorizontalScaling = BarChartHorizontalScaling::Linear;
@@ -75,4 +99,4 @@ private:
 };
 
 AppSettings* AppSettingsInstance();
-#endif // APPSETTINGS_H
+#endif //APPSETTINGS_H

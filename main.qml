@@ -16,7 +16,6 @@ ApplicationWindow {
     property var peakNote: "?"
     Material.theme: Material.Dark
     Material.accent: Material.Purple
-    SettingsDialog { id: settingsDialog }
     header: ToolBar {
         id: toolBar
         z: 99
@@ -36,7 +35,8 @@ ApplicationWindow {
                 id: buttonShowSettings
                 text: "\u2699 Settings"
                 onClicked: {
-                    settingsDialog.visible = true
+                    Qt.createQmlObject("import QtQuick 2.0\nSettingsDialog { id: settingsDialog; visible: true }",
+                                       root, "settingsDialog");
                 }
             }
             Label {

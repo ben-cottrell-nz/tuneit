@@ -39,7 +39,7 @@ Dialog {
         }
         ComboBox {
             Layout.fillWidth: true
-            model: [appSettings.audioInputDeviceName]
+            model: appSettings.availableInputDevNames
         }
         Label {
             text: qsTr("Number of Channels:")
@@ -53,7 +53,8 @@ Dialog {
         }
         ComboBox {
             Layout.fillWidth: true
-            model: [appSettings.samplingRate]
+            model: appSettings.availableSamplingRates
+//            model: [appSettings.samplingRate]
         }
         Label {
             text: qsTr("Horizontal Bar Chart Plot Mode:")
